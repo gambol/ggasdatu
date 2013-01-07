@@ -17,7 +17,7 @@ public class PublishBean {
     private int id;
     
     @Size(min = 1, max = 20)
-    private String server_name;
+    private String serverName;
      
     @Size(min = 7, max = 200)
     @URL
@@ -75,12 +75,12 @@ public class PublishBean {
         this.desc = desc;
     }
 
-    public String getServer_name() {
-        return server_name;
+    public String getServerName() {
+        return serverName;
     }
 
-    public void setServer_name(String server_name) {
-        this.server_name = server_name;
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 
     public String getUrl() {
@@ -91,14 +91,13 @@ public class PublishBean {
         this.url = url;
     }
   
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("properties name=");
-        if (server_name != null) {
-            sb.append("'").append(server_name).append("', ");
+        if (serverName != null) {
+            sb.append("'").append(serverName).append("', ");
         } else {
-            sb.append(server_name).append(", ");
+            sb.append(serverName).append(", ");
         }
         
         sb.append("categoryId:");

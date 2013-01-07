@@ -25,7 +25,7 @@
                 // validate form on keyup and submit
                 var validator = $("#publishform").validate({
                     rules: {
-                        server_name: {
+                        serverName: {
                             required: true,
                             minlength: 2,
                             maxlength: 40
@@ -47,7 +47,7 @@
                        
                     },
                     messages: {
-                        server_name: {
+                        serverName: {
                             required: "输入站点名称",
                             minlength: jQuery.format("至少需要{0} 个字符")
                         },
@@ -107,8 +107,8 @@
                 <section class="column width1 first">
                     <div class="site-nav">
                         <ul>
-                            <li  <c:if test="${not empty publishBean['server_name']}"> class="current" </c:if>><a href="/user/sitemanage.htm">发布记录</a></li>
-                            <li  <c:if test="${empty publishBean['server_name']}"> class="current" </c:if>><a href="/user/publish.htm">新站发布</a></li>
+                            <li  <c:if test="${not empty publishBean['serverName']}"> class="current" </c:if>><a href="/user/sitemanage.htm">发布记录</a></li>
+                            <li  <c:if test="${empty publishBean['serverName']}"> class="current" </c:if>><a href="/user/publish.htm">新站发布</a></li>
                             <li><a href="/user/editPassword.htm">修改密码</a></li>
                                <!-- <li><a href="#">修改密码</a></li> -->
 
@@ -137,8 +137,8 @@
                             </s:bind>
                         </p>
                         <p>
-                            <form:label cssClass="required" path="server_name">站点名称:</form:label><br/>
-                            <form:input type="text" path="server_name" cssClass="half" value=""/>
+                            <form:label cssClass="required" path="serverName">站点名称:</form:label><br/>
+                            <form:input type="text" path="serverName" cssClass="half" value=""/>
                             <span/>
                         </p>
 
@@ -187,7 +187,7 @@
                         </p>
                         <br/>
                         <!--
-                        <c:if test="${empty publishBean['server_name']}">
+                        <c:if test="${empty publishBean['serverName']}">
                             <div class="contract">
                                 <p>
 								　　新浪体育讯　北京时间8月12日，中国代表团伦敦奥运会总结大会在奥运主新闻中心新闻发布厅举行，中国代表团团长刘鹏、副团长段世杰、杨树安、肖天、蔡振华，秘书长蔡家东，以及主持人张海峰出席了本次中国奥运代表团发布会。

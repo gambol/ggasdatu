@@ -26,13 +26,13 @@ public class InterfaceReturnValue {
     Object data;
     int ver;
 
-    public InterfaceReturnValue () {
-        ret = false;
-        errcode = 0;
-        errmsg = null;
-        data = null;
-        ver = 0;
-    }
+	public InterfaceReturnValue() {
+		ret = false;
+		errcode = 0;
+		errmsg = null;
+		data = null;
+		ver = 0;
+	}
     
     public Object getData() {
         return data;

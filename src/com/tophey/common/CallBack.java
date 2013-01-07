@@ -17,5 +17,5 @@ public interface CallBack {
      *
      * @throws SQLException
      */
-    public void callback(ResultSet rs) throws SQLException;
+    void callback(ResultSet rs) throws SQLException;
 }

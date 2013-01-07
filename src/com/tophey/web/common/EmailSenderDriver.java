@@ -44,23 +44,22 @@ public class EmailSenderDriver {
     private Properties props = null;
     private Multipart mp = null;
     /** Static variable representing a high priority message. */
-    public final static String HIGH_PRIORITY = "1";
+    public static final  String HIGH_PRIORITY = "1";
     /** Static variable representing a normal priority message. */
-    public final static String NORMAL_PRIORITY = "3";
+    public static final  String NORMAL_PRIORITY = "3";
     /** Static variable representing a low priority message. */
-    public final static String LOW_PRIORITY = "5";
+    public static final  String LOW_PRIORITY = "5";
     /** The SMTP host used to send the message. */
     private String smtpHost = new String("");
     /** If using SMTP authentication, then this is the username to login to the SMTP server as. */
     private String smtpUsername = null;
     /** If using SMTP authentication, then this is the password for the username to login to the SMTP server as. */
     private String smtpPassword = null;
-    /** The port the SMTP server is listening on. */
-    private int smtpPort = 25;
     private long timeout;
     /** If we are to use SMTP authentication when sending the message. */
     private boolean usingAuthentication = false;
     private boolean usingSSL = false;
+    private int smtpPort;
 
     public EmailSenderDriver() {
         log.debug("init Sender");
@@ -101,7 +100,8 @@ public class EmailSenderDriver {
 
         props.put("mail.smtp.host", this.smtpHost);
 
-        if ((this.smtpUsername != null && this.smtpUsername.length() > 0) || (smtpPassword != null && smtpPassword.length() > 0)) {
+        if ((this.smtpUsername != null && this.smtpUsername.length() > 0)
+        		|| (smtpPassword != null && smtpPassword.length() > 0)) {
             props.put("mail.smtp.auth", "true");
             usingAuthentication = true;
         } else {
@@ -118,7 +118,7 @@ public class EmailSenderDriver {
      */
     public void setSMTPPort(int smtpPort) throws Exception {
         this.smtpPort = smtpPort;
-        props.put("mail.smtp.port", String.valueOf(smtpPort));
+        props.put("mail.smtp.port", String.valueOf(this.smtpPort));
     }
 
     /**
@@ -255,7 +255,6 @@ public class EmailSenderDriver {
 
         if (fromName != null && fromName.length() > 0) {
             msg.setFrom(new InternetAddress(msgFrom, MimeUtility.encodeText(fromName,"GBK","B")));
-//            msg.setFrom(new InternetAddress(msgFrom, "=?GBK?B?"+ Base64.encodeToString(fromName.getBytes(), true)+"?="));
         } else {
             msg.setFrom(new InternetAddress(msgFrom));
         }
@@ -286,8 +285,10 @@ public class EmailSenderDriver {
 
         if (msgReplyToName != null && msgReplyToName.length() > 0) {
 
-            InternetAddress[] address = {new InternetAddress(msgReplyTo, MimeUtility.encodeText(replyToName,"GBK","B"))};
-//            InternetAddress[] address = {new InternetAddress(msgReplyTo, "=?GBK?B?"+ Base64.encodeToString(replyToName.getBytes(), true)+"?=")};
+            InternetAddress[] address = {new InternetAddress(msgReplyTo, 
+            		MimeUtility.encodeText(replyToName,"GBK","B"))};
+//            InternetAddress[] address = {new InternetAddress(msgReplyTo, "=?GBK?B?"+ 
+//            Base64.encodeToString(replyToName.getBytes(), true)+"?=")};
             msg.setReplyTo(address);
         } else {
             InternetAddress[] address = {new InternetAddress(msgReplyTo)};
@@ -339,7 +340,8 @@ public class EmailSenderDriver {
      */
     private void setPriority(String priorityValue) throws Exception {
         //if (priorityValue < 1 || priorityValue > 5) {
-        //    throw new Exception ("An invalid priority value of " + priorityValue + " has been specified for the email.");
+        //    throw new Exception ("An invalid priority value of "
+    	//+ priorityValue + " has been specified for the email.");
         //}
         if (priorityValue != null && priorityValue.trim().length() > 0) {
             msg.setHeader("X-Priority", priorityValue);
@@ -442,8 +444,8 @@ public class EmailSenderDriver {
             int streamLen) throws MessagingException, IOException {
 
         String logMsg = "";
-        byte b[] = new byte[streamLen];
-        byte encodeByte[] = new byte[streamLen * 3];
+        byte[] b = new byte[streamLen];
+        byte[] encodeByte = new byte[streamLen * 3];
         String encodeString = new String("");
 
         BufferedInputStream bistrm = new BufferedInputStream(inputStream);

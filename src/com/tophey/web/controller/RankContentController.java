@@ -32,7 +32,7 @@ public class RankContentController {
 //        int totalCount = sq.getServerCountByCategory(rpq.getCategoryId());
         int totalCount = sq.getServerCountByCategory("1");
 //        List<ServerInfoDetail> retList = sq.getServerInfoDetailPageByCategory(rpq.getCategoryId(), rpq.getStart(),rpq.getSize());
-        List<ServerInfoDetail> retList = sq.getServerInfoDetailPageByCategory("1", 0,50);
+        List<ServerInfoDetail> retList = sq.getSIDByCategoryId("1", 0,50);
         int curPage = (0 +1 ) / 50;
         PageResult pr = new PageResult<ServerInfoDetail>(totalCount, curPage,50, retList);
         model.put("pageResult", pr);

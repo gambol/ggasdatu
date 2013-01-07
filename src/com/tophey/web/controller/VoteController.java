@@ -31,72 +31,72 @@ import com.tophey.utils.JDBCUtils;
 @RequestMapping("/")
 public class VoteController {
 
-    private final static Logger logger = Logger.getLogger(VoteController.class.getName());
-    public final static int VOTE_INTERVAL = 1 * 60 * 1000; // 1分钟
+    private static final  Logger logger = Logger.getLogger(VoteController.class.getName());
+    public static final int VOTE_INTERVAL = 1 * 60 * 1000; // 1分钟
 
-    @RequestMapping("/vote")
-    public @ResponseBody
-    String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/vote")
+	public @ResponseBody
+	String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        String strId = request.getParameter("id");
-        int id = 0;
-        try {
-            id = Integer.parseInt(strId);
-        } catch (Exception e) {
-        }
+		String strId = request.getParameter("id");
+		int id = 0;
+		try {
+			id = Integer.parseInt(strId);
+		} catch (Exception e) {
+		}
 
-        if (id == 0) {
-            return "";
-        }
+		if (id == 0) {
+			return "";
+		}
 
-        boolean isTrue = false;
-        boolean isNewIP = false;
-        try {
-            Long starttime = null;
-            Calendar date = new GregorianCalendar();
-            String ip = request.getRemoteAddr();
-            Cookie[] cookies = request.getCookies();
-            if (cookies == null) {
-                Cookie cookie = new Cookie(ip, ((Object) date.getTimeInMillis()).toString());
-                cookie.setMaxAge(VOTE_INTERVAL / 1000);
-                response.addCookie(cookie);
-            } else {
-                for (int i = 0; i < cookies.length; i++) {
+		boolean isTrue = false;
+		boolean isNewIP = false;
+		try {
+			Long starttime = null;
+			Calendar date = new GregorianCalendar();
+			String ip = request.getRemoteAddr();
+			Cookie[] cookies = request.getCookies();
+			if (cookies == null) {
+				Cookie cookie = new Cookie(ip, ((Object) date.getTimeInMillis()).toString());
+				cookie.setMaxAge(VOTE_INTERVAL / 1000);
+				response.addCookie(cookie);
+			} else {
+				for (int i = 0; i < cookies.length; i++) {
 
-                    if (cookies[i].getName().equalsIgnoreCase(ip.toString())) {
-                        starttime = Long.parseLong(cookies[i].getValue());
-                        isNewIP = true;
-                    }
-                }
-            }
-            if (!isNewIP) {//判断是否投过票
-                Cookie cookie = new Cookie(ip, ((Object) date.getTimeInMillis()).toString());
-                cookie.setMaxAge(VOTE_INTERVAL / 1000);
-                response.addCookie(cookie);
-            }
-            if (starttime != null) {//如果投过票判断时间是否大于
-                Long endtime = date.getTimeInMillis();
-                System.out.println(starttime + "--" + endtime + "--" + VOTE_INTERVAL);
-                if (endtime - starttime - VOTE_INTERVAL > 0) {
-                    isTrue = true;
-                }
-            } else {
-                isTrue = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            isTrue = false;
-        }
+					if (cookies[i].getName().equalsIgnoreCase(ip.toString())) {
+						starttime = Long.parseLong(cookies[i].getValue());
+						isNewIP = true;
+					}
+				}
+			}
+			if (!isNewIP) {// 判断是否投过票
+				Cookie cookie = new Cookie(ip, ((Object) date.getTimeInMillis()).toString());
+				cookie.setMaxAge(VOTE_INTERVAL / 1000);
+				response.addCookie(cookie);
+			}
+			if (starttime != null) {// 如果投过票判断时间是否大于
+				Long endtime = date.getTimeInMillis();
+				System.out.println(starttime + "--" + endtime + "--" + VOTE_INTERVAL);
+				if (endtime - starttime - VOTE_INTERVAL > 0) {
+					isTrue = true;
+				}
+			} else {
+				isTrue = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			isTrue = false;
+		}
 
-        if (isTrue)//判断是否可以投票
-        {
-            // 更新db
-            addDBVote(id);
-            return "+1";
-        } else {
-            return "";
-        }
-    }
+		if (isTrue)// 判断是否可以投票
+		{
+			// 更新db
+			addDBVote(id);
+			return "+1";
+		} else {
+			return "";
+		}
+	}
     
     /**
      * 给DB中对应server 投票数加1
