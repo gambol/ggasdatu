@@ -1,0 +1,23 @@
+status: 304
+content-length: 350
+content-location: http://001.jnrongwei.com/
+accept-ranges: bytes
+-varied-accept-encoding: gzip, deflate
+vary: Accept-Encoding
+server: Microsoft-IIS/7.0
+last-modified: Fri, 20 Jul 2012 02:19:56 GMT
+-content-encoding: gzip
+etag: "02e6b271e66cd1:0"
+date: Mon, 23 Jul 2012 14:38:34 GMT
+content-type: text/html
+-varied-accept-encoding: gzip, deflate
+
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-CN">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<meta http-equiv="refresh" content="0;url=http://adrs.sdo.com/ADRefererSystem/adjump.aspx?SndaADID=12-72-07-MIRS-644-01&RedirectUrl=http%3a%2f%2fwww.jnrongwei.com">
+<title></title>
+</head>
+</body>
+</html>
