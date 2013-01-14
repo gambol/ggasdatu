@@ -139,6 +139,7 @@ code, kbd, samp, pre, tt, var, .code {
 p {
     margin-top: 1em;
     word-spacing: 0.125em;
+    font-size: 13px;
 }
 p + p {
 }

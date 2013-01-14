@@ -28,7 +28,7 @@ conn = MySQLdb.connect(host='127.0.0.1', user='gambol', unix_socket="/home/zhenb
 cursor = conn.cursor()
 cursor.execute('set names "utf8"');
 
-commonPositionMap = {"名称|名字|私服":0,
+commonPositionMap = {"名称|名字|私服|服务器名":0,
               "线路" :0,
               "描述|介绍": 0,
               "链接" : 0,
@@ -38,7 +38,7 @@ commonPositionMap = {"名称|名字|私服":0,
               "IP"   : 0,
               "QQ"   : 0};
 
-fieldCastDict = {"名称|名字|私服":'name',
+fieldCastDict = {"名称|名字|私服|服务器名":'name',
               "线路" : 'line',
               "描述|介绍": 'description',
               "链接" : '',
@@ -120,7 +120,7 @@ def insertIntoDb(contentMap, category_id, index):
     field  = ",".join(allSqlFields)
     value = ",".join(valueFields)
     value = stringEntities(value)
-    name = contentMap['名称|名字|私服']
+    name = contentMap['名称|名字|私服|服务器名']
     url = contentMap['url']
     
     #sql = "insert into crawl.parser_result (%s) values (%s);" % (field, value)
@@ -215,9 +215,10 @@ if __name__ == "__main__":
     
     # for r in result:
     #     dealUrlAndCategory(r);
-    # html = open('www.8uu.com.htm').read()
+    #html = open('html/www.8uu.com.htm').read()
+    html = open('html/jjj.com.htm').read()
     # html = open('www.yslead.com.htm').read()
-    html = open('www.bitiwow.com.htm').read()
+    #html = open('www.bitiwow.com.htm').read()
     # html = fetchUrl('http://www.bitiwow.com/');
     # html = fetchUrl('http://zhaokf.com/');
     # html = open("sf065Game.htm").read()
